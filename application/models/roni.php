@@ -13,8 +13,7 @@ class Roni extends CI_Model{
 		$query = $this->db->get();
 		if($query->num_rows == 0){
 			return FALSE;
-		}
-		else{
+		} else {
 			return $query->result();
 		}
 	}
