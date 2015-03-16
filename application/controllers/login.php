@@ -31,24 +31,29 @@ class Login extends CI_Controller {
 			<?php
 			echo '<meta http-equiv="refresh" content="0; url='.base_url('index.php/login').'">';
 		} else {
-			foreach ($logged_in as $jones) {
-				$switch = $jones->secure;
-			}
-			$this->session->set_userdata(array('control'=>$switch));
-			redirect('index.php/login/sukses');
+			$data = array(
+				'control' => $this->_login()
+				);
+			$this->session->set_userdata($data);
+			?>
+				<script>
+					alert('Login berhasil!');
+				</script>
+			<?php
+			echo '<meta http-equiv="refresh" content="0; url='.base_url('index.php/login/sukses').'">';
 		}
 	}
 
-	// public function _login()
-	// {
-	// 	$session = $this->session->userdata('control');
-	// 	$roni = $this->roni->roni_one('users',array('secure'=>$session));
-	// 	if ($roni == FALSE) {
-	// 		return array();
-	// 	} else {
-	// 		return $roni;
-	// 	}
-	// }
+	public function _login()
+	{
+		$session = $this->session->userdata('control');
+		$roni = $this->roni->roni_one('users',array('secure'=>$session));
+		if ($roni == FALSE) {
+			return array();
+		} else {
+			return $roni;
+		}
+	}
 
 	public function sukses()
 	{
